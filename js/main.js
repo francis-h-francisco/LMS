@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressKey = `lmsProgress_${currentCourseId}`;
 
     // --- GOOGLE SHEETS CONFIGURATION ---
-    // YOUR ACTUAL GOOGLE WEB APP URL
+    // GOOGLE WEB APP URL
     const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwrv6v7pUs9f_8EXIp5L7b2n9gy5zggQhz79O59y1HQ_0wTX2EBP9gtSyQlpUcJUodjnQ/exec';
 
     // Mobile navigation elements
@@ -397,7 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     } else {
                         if (feedbackDiv) {
-                            feedbackDiv.innerHTML = `Incorrect. The right answer is: ${q.options[q.correct]} <span class="hint-text">${q.hint}</span>`;
+                            feedbackDiv.innerHTML = `Incorrect. <span class="hint-text">${q.hint}</span>`;
                             feedbackDiv.className = 'question-feedback incorrect-answer';
                         }
                     }
@@ -824,4 +824,5 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     initializeCourse();
+
 });
