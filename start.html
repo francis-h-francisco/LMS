@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Begin Your Course</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Course Registration</h1>
+    </header>
+    <main class="form-container">
+        <h2>Enter Your Details</h2>
+        <p>Your information will be used to generate your certificate of completion.</p>
+        <form id="user-details-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" placeholder="e.g., John" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" placeholder="e.g., Doe" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="congregation">Congregation:</label>
+                <input type="text" id="congregation" placeholder="e.g., Manila Central" required>
+            </div>
+            <div class="form-group">
+                <label for="userCode">Personal Volunteer Code:</label>
+                <input type="text" id="userCode" placeholder="e.g., IC2026VM007" required>
+            </div>
+            <p id="error-message" class="error-message"></p>
+            <button type="submit" class="button">Start Learning</button>
+        </form>
+    </main>
+    <script>
+        document.getElementById('user-details-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const congregation = document.getElementById('congregation').value;
+            const userCode = document.getElementById('userCode').value;
+            const errorMessage = document.getElementById('error-message');
+
+            if (firstName.trim() && lastName.trim() && congregation.trim() && userCode.trim()) {
+                // Store user details
+                localStorage.setItem('lmsUserFirstName', firstName);
+                localStorage.setItem('lmsUserLastName', lastName);
+                localStorage.setItem('lmsUserCongregation', congregation);
+                localStorage.setItem('lmsUserCode', userCode);
+                
+                // Get course ID from URL parameter
+                const urlParams = new URLSearchParams(window.location.search);
+                const courseId = urlParams.get('course') || 'tour-guiding';
+                localStorage.setItem('lmsCurrentCourse', courseId);
+                
+                // Clear previous course progress when starting
+                const progressKeys = ['tourGuidingLMSProgress', 'busCaptainLMSProgress', 'hotelHelpDeskLMSProgress'];
+                progressKeys.forEach(key => localStorage.removeItem(key));
+                
+                // Save initial user data
+                saveUserData({
+                    firstName: firstName,
+                    lastName: lastName,
+                    congregation: congregation,
+                    userCode: userCode,
+                    courseId: courseId,
+                    startTime: new Date().toISOString(),
+                    status: 'started'
+                });
+                
+                window.location.href = 'course.html';
+            } else {
+                errorMessage.textContent = 'Please fill out all fields.';
+            }
+        });
+
+        // Function to save user data to CSV
+        function saveUserData(userData) {
+            // Create CSV header if file doesn't exist
+            const header = 'Timestamp,FirstName,LastName,Congregation,UserCode,CourseID,Status,Progress,QuizScore,CompletionTime\n';
+            
+            // Create CSV row
+            const csvRow = [
+                userData.startTime,
+                `"${userData.firstName}"`,
+                `"${userData.lastName}"`,
+                `"${userData.congregation}"`,
+                `"${userData.userCode}"`,
+                userData.courseId,
+                userData.status,
+                userData.progress || '0%',
+                userData.quizScore || 'N/A',
+                userData.completionTime || 'N/A'
+            ].join(',') + '\n';
+            
+            // Try to save to file (this will work in some environments)
+            try {
+                // Method 1: Using FileSaver.js (you'd need to include the library)
+                // saveAs(new Blob([header + csvRow], { type: 'text/csv' }), 'user-progress.csv');
+                
+                // Method 2: Console log for manual copying
+                console.log('User Data CSV:', csvRow);
+                
+                // Method 3: Store in localStorage for later download
+                let existingData = localStorage.getItem('userProgressData') || header;
+                localStorage.setItem('userProgressData', existingData + csvRow);
+                
+            } catch (error) {
+                console.log('User data recorded:', userData);
+            }
+        }
+    </script>
+</body>
+</html>

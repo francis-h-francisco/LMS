@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course - Simple LMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Mobile Navigation Header -->
+    <div class="mobile-nav-header">
+        <h3>IC2026 E-Courses</h3>
+        <button class="mobile-nav-toggle" aria-label="Open navigation menu">☰</button>
+    </div>
+    
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay"></div>
+    
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav-menu">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h3>IC2026 E-Courses</h3>
+            <button class="mobile-nav-close" aria-label="Close navigation menu">✕</button>
+        </div>
+        <h3 id="welcome-user"></h3>
+        <a href="index.html" class="back-link">&larr; Back to Dashboard</a>
+        <ul id="mobile-navigation-list"></ul>
+    </div>
+
+    <div class="course-container">
+        <nav class="course-nav">
+            <h3>IC2026 E-Courses</h3>
+            <h3 id="welcome-user"></h3>
+            <a href="index.html" class="back-link">&larr; Back to Dashboard</a>
+            <ul id="course-navigation-list"></ul>
+        </nav>
+
+        <main id="course-content-area" class="course-content">
+            <div class="progress-container">
+                <div class="progress-bar-outline">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="toast-notification"></div>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS Course Documentation</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .doc-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .doc-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        .doc-section {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .doc-section h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .doc-section h3 {
+            color: var(--text-color);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .file-structure {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .file-path {
+            font-family: 'Courier New', monospace;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #856404;
+        }
+        .info-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #0c5460;
+        }
+        .step {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .step-number {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 0.5rem;
+            font-weight: bold;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .json-key {
+            color: #d73a49;
+        }
+        .json-string {
+            color: #032f62;
+        }
+        .json-number {
+            color: #005cc5;
+        }
+        .json-boolean {
+            color: #6f42c1;
+        }
+        .example-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 768px) {
+            .example-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .content-type {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .content-type h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .content-types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>IC2026 E-Courses - Course Documentation</h1>
+    </header>
+
+    <main class="doc-container">
+        <div class="doc-header">
+            <h1>Course Management Guide</h1>
+            <p>Learn how to manually create, edit, and manage courses using JSON files</p>
+        </div>
+
+        <div class="doc-section">
+            <h2>📁 File Structure Overview</h2>
+            <div class="file-structure">
+                <div><span class="file-path">data/courses.json</span> - Main course catalog</div>
+                <div><span class="file-path">data/course-{id}.json</span> - Individual course content</div>
+            </div>
+            
+            <div class="info-box">
+                <strong>💡 Pro Tip:</strong> You can use either the visual Course Builder or manual JSON editing - both methods work together!
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>🆕 Adding a New Course</h2>
+            
+            <div class="step">
+                <h3><span class="step-number">1</span> Update courses.json</h3>
+                <p>Add your new course to the <code>courses</code> array in <code>data/courses.json</code>:</p>
+                
+                <div class="code-block">
+{
+  <span class="json-key">"courses"</span>: [
+    {
+      <span class="json-key">"id"</span>: <span class="json-string">"your-course-id"</span>,
+      <span class="json-key">"title"</span>: <span class="json-string">"Your Course Title"</span>,
+      <span class="json-key">"description"</span>: <span class="json-string">"Course description here"</span>,
+      <span class="json-key">"image"</span>: <span class="json-string">"https://example.com/image.jpg"</span>,
+      <span class="json-key">"dataFile"</span>: <span class="json-string">"data/course-your-course-id.json"</span>,
+      <span class="json-key">"certificateTitle"</span>: <span class="json-string">"Certificate Title"</span>,
+      <span class="json-key">"certificateMessage"</span>: <span class="json-string">"Certificate message here"</span>
+    }
+    <span class="json-comment">// ... other courses</span>
+  ]
+}
+                </div>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">2</span> Create Course Content File</h3>
+                <p>Create a new JSON file following the naming pattern <code>course-{id}.json</code> in the <code>data/</code> folder:</p>
+                
+                <div class="code-block">
+{
+  <span class="json-key">"courseTitle"</span>: <span class="json-string">"Your Course Title"</span>,
+  <span class="json-key">"modules"</span>: [
+    {
+      <span class="json-key">"moduleTitle"</span>: <span class="json-string">"Module 1 Title"</span>,
+      <span class="json-key">"lessons"</span>: [
+        {
+          <span class="json-key">"id"</span>: <span class="json-string">"m1l1"</span>,
+          <span class="json-key">"title"</span>: <span class="json-string">"Lesson 1.1 Title"</span>,
+          <span class="json-key">"content"</span>: [
+            <span class="json-comment">// Content items go here</span>
+          ]
+        }
+      ]
+    }
+  ],
+  <span class="json-key">"quiz"</span>: {
+    <span class="json-key">"id"</span>: <span class="json-string">"quiz"</span>,
+    <span class="json-key">"title"</span>: <span class="json-string">"Final Assessment"</span>,
+    <span class="json-key">"questions"</span>: [
+      <span class="json-comment">// Quiz questions go here</span>
+    ]
+  }
+}
+                </div>
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>✏️ Editing an Existing Course</h2>
+            
+            <div class="step">
+                <h3><span class="step-number">1</span> Update Course Information</h3>
+                <p>Edit the course entry in <code>data/courses.json</code> to change title, description, image, or certificate details.</p>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">2</span> Modify Course Content</h3>
+                <p>Edit the corresponding <code>course-{id}.json</code> file to update modules, lessons, or quiz questions.</p>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Important:</strong> If you change a course ID, make sure to also rename the corresponding JSON file and update the dataFile reference in courses.json.
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>🗑️ Deleting a Course</h2>
+            
+            <div class="step">
+                <h3><span class="step-number">1</span> Remove from courses.json</h3>
+                <p>Delete the course entry from the <code>courses</code> array in <code>data/courses.json</code>.</p>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">2</span> Delete Content File</h3>
+                <p>Remove the corresponding <code>course-{id}.json</code> file from the <code>data/</code> folder.</p>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Note:</strong> This will not delete user progress data. User completion records will remain in the system but the course will no longer be accessible.
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>📚 Content Types Reference</h2>
+            
+            <div class="content-types-grid">
+                <div class="content-type">
+                    <h4>📝 Text Content</h4>
+                    <div class="code-block">
+{
+  <span class="json-key">"type"</span>: <span class="json-string">"text"</span>,
+  <span class="json-key">"data"</span>: <span class="json-string">"Your text content here..."</span>
+}
+                    </div>
+                </div>
+
+                <div class="content-type">
+                    <h4>📋 List Content</h4>
+                    <div class="code-block">
+{
+  <span class="json-key">"type"</span>: <span class="json-string">"list"</span>,
+  <span class="json-key">"data"</span>: [
+    <span class="json-string">"List item 1"</span>,
+    <span class="json-string">"List item 2"</span>,
+    <span class="json-string">"List item 3"</span>
+  ]
+}
+                    </div>
+                </div>
+
+                <div class="content-type">
+                    <h4>🎥 Video Content</h4>
+                    <div class="code-block">
+{
+  <span class="json-key">"type"</span>: <span class="json-string">"video"</span>,
+  <span class="json-key">"data"</span>: <span class="json-string">"https://www.youtube.com/embed/VIDEO_ID"</span>
+}
+                    </div>
+                </div>
+
+                <div class="content-type">
+                    <h4>💡 Tip Content</h4>
+                    <div class="code-block">
+{
+  <span class="json-key">"type"</span>: <span class="json-string">"tip"</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"summary"</span>: <span class="json-string">"Tip summary"</span>,
+    <span class="json-key">"details"</span>: <span class="json-string">"Detailed tip content..."</span>
+  }
+}
+                    </div>
+                </div>
+
+                <div class="content-type">
+                    <h4>📥 Action Content</h4>
+                    <div class="code-block">
+{
+  <span class="json-key">"type"</span>: <span class="json-string">"actions"</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"download"</span>: {
+      <span class="json-key">"url"</span>: <span class="json-string">"https://example.com/file.pdf"</span>,
+      <span class="json-key">"text"</span>: <span class="json-string">"Download File"</span>
+    }
+  }
+}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>❓ Quiz Questions Reference</h2>
+            
+            <div class="example-grid">
+                <div>
+                    <h4>Multiple Choice Question</h4>
+                    <div class="code-block">
+{
+  <span class="json-key">"id"</span>: <span class="json-string">"q1"</span>,
+  <span class="json-key">"text"</span>: <span class="json-string">"What is the capital of France?"</span>,
+  <span class="json-key">"options"</span>: {
+    <span class="json-key">"a"</span>: <span class="json-string">"London"</span>,
+    <span class="json-key">"b"</span>: <span class="json-string">"Paris"</span>,
+    <span class="json-key">"c"</span>: <span class="json-string">"Berlin"</span>
+  },
+  <span class="json-key">"correct"</span>: <span class="json-string">"b"</span>,
+  <span class="json-key">"hint"</span>: <span class="json-string">"Think about famous landmarks..."</span>
+}
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Essay Question</h4>
+                    <div class="code-block">
+{
+  <span class="json-key">"id"</span>: <span class="json-string">"q2"</span>,
+  <span class="json-key">"type"</span>: <span class="json-string">"essay"</span>,
+  <span class="json-key">"text"</span>: <span class="json-string">"Explain the main concepts..."</span>,
+  <span class="json-key">"suggestion"</span>: <span class="json-string">"Suggested answer goes here..."</span>
+}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>📋 Complete Example</h2>
+            
+            <div class="step">
+                <h3>courses.json Entry</h3>
+                <div class="code-block">
+{
+  <span class="json-key">"id"</span>: <span class="json-string">"customer-service"</span>,
+  <span class="json-key">"title"</span>: <span class="json-string">"Customer Service Excellence"</span>,
+  <span class="json-key">"description"</span>: <span class="json-string">"Learn essential customer service skills"</span>,
+  <span class="json-key">"image"</span>: <span class="json-string">"https://placehold.co/400x200.png?text=Customer+Service"</span>,
+  <span class="json-key">"dataFile"</span>: <span class="json-string">"data/course-customer-service.json"</span>,
+  <span class="json-key">"certificateTitle"</span>: <span class="json-string">"Customer Service Excellence"</span>,
+  <span class="json-key">"certificateMessage"</span>: <span class="json-string">"Congratulations on mastering customer service skills!"</span>
+}
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>course-customer-service.json</h3>
+                <div class="code-block">
+{
+  <span class="json-key">"courseTitle"</span>: <span class="json-string">"Customer Service Excellence"</span>,
+  <span class="json-key">"modules"</span>: [
+    {
+      <span class="json-key">"moduleTitle"</span>: <span class="json-string">"Module 1: Fundamentals"</span>,
+      <span class="json-key">"lessons"</span>: [
+        {
+          <span class="json-key">"id"</span>: <span class="json-string">"m1l1"</span>,
+          <span class="json-key">"title"</span>: <span class="json-string">"1.1: Understanding Customer Needs"</span>,
+          <span class="json-key">"content"</span>: [
+            {
+              <span class="json-key">"type"</span>: <span class="json-string">"text"</span>,
+              <span class="json-key">"data"</span>: <span class="json-string">"Great customer service starts with understanding what customers truly need."</span>
+            },
+            {
+              <span class="json-key">"type"</span>: <span class="json-string">"list"</span>,
+              <span class="json-key">"data"</span>: [
+                <span class="json-string">"Active listening skills"</span>,
+                <span class="json-string">"Empathy and understanding"</span>,
+                <span class="json-string">"Clear communication"</span>
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  <span class="json-key">"quiz"</span>: {
+    <span class="json-key">"id"</span>: <span class="json-string">"quiz"</span>,
+    <span class="json-key">"title"</span>: <span class="json-string">"Customer Service Assessment"</span>,
+    <span class="json-key">"questions"</span>: [
+      {
+        <span class="json-key">"id"</span>: <span class="json-string">"q1"</span>,
+        <span class="json-key">"text"</span>: <span class="json-string">"What is the most important aspect of customer service?"</span>,
+        <span class="json-key">"options"</span>: {
+          <span class="json-key">"a"</span>: <span class="json-string">"Speed"</span>,
+          <span class="json-key">"b"</span>: <span class="json-string">"Understanding customer needs"</span>,
+          <span class="json-key">"c"</span>: <span class="json-string">"Cost efficiency"</span>
+        },
+        <span class="json-key">"correct"</span>: <span class="json-string">"b"</span>,
+        <span class="json-key">"hint"</span>: <span class="json-string">"Think about what builds long-term relationships."</span>
+      }
+    ]
+  }
+}
+                </div>
+            </div>
+        </div>
+
+        <div class="doc-section">
+            <h2>🔧 Troubleshooting</h2>
+            
+            <div class="step">
+                <h3>Common Issues</h3>
+                <div class="warning-box">
+                    <strong>Course not appearing?</strong><br>
+                    Check that the course ID in courses.json matches the filename pattern: course-{id}.json
+                </div>
+                
+                <div class="warning-box">
+                    <strong>JSON syntax errors?</strong><br>
+                    Use a JSON validator tool. Ensure all quotes, commas, and brackets are properly closed.
+                </div>
+                
+                <div class="warning-box">
+                    <strong>Images not loading?</strong><br>
+                    Verify image URLs are accessible and use HTTPS if possible.
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>Validation Tools</h3>
+                <ul>
+                    <li>Use <a href="https://jsonformatter.org/" target="_blank">JSON Formatter</a> to validate your JSON</li>
+                    <li>Check browser console for JavaScript errors (F12)</li>
+                    <li>Test image URLs directly in your browser</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="admin.html" class="button">← Back to Admin Panel</a>
+            <a href="index.html" class="button-secondary">View Trainee Dashboard</a>
+            <button onclick="window.print()" class="button-secondary">Print This Guide</button>
+        </div>
+    </main>
+
+    <script>
+        // Add syntax highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simple syntax highlighting for JSON
+            const codeBlocks = document.querySelectorAll('.code-block');
+            codeBlocks.forEach(block => {
+                let html = block.innerHTML;
+                
+                // Highlight JSON keys
+                html = html.replace(/"([^"]+)":/g, '<span class="json-key">"$1"</span>:');
+                
+                // Highlight strings (simplified approach)
+                html = html.replace(/: "([^"]*)"/g, ': <span class="json-string">"$1"</span>');
+                
+                // Highlight numbers
+                html = html.replace(/: (\d+)/g, ': <span class="json-number">$1</span>');
+                
+                // Highlight booleans
+                html = html.replace(/: (true|false)/g, ': <span class="json-boolean">$1</span>');
+                
+                // Highlight comments
+                html = html.replace(/<span class="json-comment">([^<]*)<\/span>/g, '<span style="color: #6a737d; font-style: italic;">$1</span>');
+                
+                block.innerHTML = html;
+            });
+
+            // Add copy to clipboard functionality
+            codeBlocks.forEach(block => {
+                const copyButton = document.createElement('button');
+                copyButton.textContent = 'Copy';
+                copyButton.style.cssText = `
+                    position: absolute;
+                    top: 0.5rem;
+                    right: 0.5rem;
+                    background: var(--primary-color);
+                    color: white;
+                    border: none;
+                    border-radius: 3px;
+                    padding: 0.25rem 0.5rem;
+                    font-size: 0.8rem;
+                    cursor: pointer;
+                `;
+                
+                copyButton.addEventListener('click', function() {
+                    const text = block.textContent || block.innerText;
+                    navigator.clipboard.writeText(text).then(() => {
+                        const originalText = copyButton.textContent;
+                        copyButton.textContent = 'Copied!';
+                        setTimeout(() => {
+                            copyButton.textContent = originalText;
+                        }, 2000);
+                    });
+                });
+                
+                block.style.position = 'relative';
+                block.appendChild(copyButton);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "courseTitle": "Hotel Help Desk Operations",
+  "modules": [
+    {
+      "moduleTitle": "Module 1: Front Desk Fundamentals",
+      "lessons": [
+        {
+          "id": "m1l1",
+          "title": "1.1: Guest Service Standards",
+          "content": [
+            {"type": "text", "data": "Hotel front desk staff are the first point of contact for guests and set the tone for their entire stay."},
+            {"type": "list", "data": ["Warm welcome and greeting", "Efficient check-in process", "Knowledge of hotel amenities", "Problem resolution skills"]}
+          ]
+        }
+      ]
+    }
+  ],
+  "quiz": {
+    "id": "quiz",
+    "title": "Hotel Help Desk Final Assessment",
+    "questions": [
+      {
+        "id": "q1",
+        "text": "What is the most important quality for hotel front desk staff?",
+        "options": {
+          "a": "Exceptional customer service skills",
+          "b": "Knowledge of accounting",
+          "c": "Culinary expertise"
+        },
+        "correct": "a",
+        "hint": "Consider what guests experience first."
+      }
+    ]
+  }
+}

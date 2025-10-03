@@ -1,0 +1,101 @@
+{
+  "courseTitle": "Fundamentals of Tour Guiding",
+  "modules": [
+    {
+      "moduleTitle": "Module 1: The Foundation",
+      "lessons": [
+        {
+          "id": "m1l1",
+          "title": "1.1: What is a Tour Guide?",
+          "content": [
+            {"type": "text", "data": "A tour guide is a professional who leads individuals or groups through a place of interest, such as a historical site, museum, city, or natural landscape. More than just a navigator, a guide is an educator, an entertainer, and a cultural ambassador."},
+            {"type": "list", "data": ["Passion: Genuine enthusiasm for the subject matter.", "Knowledge: In-depth understanding of the history, culture, and facts.", "Charisma: An engaging personality that connects with people.", "Professionalism: Punctuality, preparedness, and a respectful demeanor."]}
+          ]
+        },
+        {
+          "id": "m1l2",
+          "title": "1.2: Roles & Responsibilities",
+          "content": [
+            {"type": "text", "data": "A tour guide's job is multi-faceted. Core responsibilities include:"},
+            {"type": "list", "data": ["Interpretation: Explaining the significance of sights and translating complex information into understandable and engaging stories.", "Safety and Logistics: Ensuring the well-being of the group, managing time, and coordinating with drivers, venues, and other services.", "Customer Service: Answering questions, addressing concerns, and ensuring a positive experience for every guest.", "Representation: Acting as a representative of your city, region, or country. Your actions reflect on the local tourism industry."]}
+          ]
+        }
+      ]
+    },
+    {
+      "moduleTitle": "Module 2: Essential Skills",
+      "lessons": [
+        {
+          "id": "m2l1",
+          "title": "2.1: The Art of Storytelling",
+          "content": [
+            {"type": "text", "data": "Facts tell, but stories sell. The most memorable tours are compelling narratives. Watch the video below for an introduction to the art of storytelling."},
+            {"type": "video", "data": "https://www.youtube.com/embed/_k-g-e4e2_o"}
+          ]
+        },
+        {
+          "id": "m2l2",
+          "title": "2.2: Effective Group Management",
+          "content": [
+            {"type": "text", "data": "Keeping a group of diverse individuals engaged and on schedule is a challenge. Establish clear expectations at the beginning of the tour (e.g., meeting times, safety rules). Use a clear voice, make eye contact, and learn to \"read the room\" to adjust your pace or tone as needed."}
+          ]
+        }
+      ]
+    },
+    {
+      "moduleTitle": "Module 3: Crafting the Experience",
+      "lessons": [
+        {
+          "id": "m3l1",
+          "title": "3.1: Research & Preparation",
+          "content": [
+            {"type": "text", "data": "Let's use the [Manila Tourist Destination] as an example. Your research should uncover the human stories behind the landmark. A great guide prepares a checklist of key points to cover."},
+            {"type": "actions", "data": {"download": {"url": "assets/Tour_Guiding_Checklist.pdf", "text": "Download Checklist"}}}
+          ]
+        },
+        {
+          "id": "m3l2",
+          "title": "3.2: Building Your Narrative",
+          "content": [
+            {"type": "text", "data": "A tour is a journey. Structure it with a clear beginning, middle, and end. Start with a hook, build your story, and conclude with a memorable summary."},
+            {"type": "tip", "data": {"summary": "Pro Tip: The 'Hook, Line, and Sinker' Method", "details": "<p><strong>Hook:</strong> Start with a surprising fact or an intriguing question. 'Did you know this church is older than the United States?'</p><p><strong>Line:</strong> This is the main body of your story, connecting facts thematically.</p><p><strong>Sinker:</strong> End with a powerful statement that makes the story memorable and 'sinks in.'</p>"}}
+          ]
+        }
+      ]
+    }
+  ],
+  "quiz": {
+    "id": "quiz",
+    "title": "Final Knowledge Check",
+    "questions": [
+      {
+        "id": "q1",
+        "text": "What is the primary goal of a tour guide beyond simply stating facts?",
+        "options": {
+          "a": "Managing the schedule perfectly",
+          "b": "Acting as a storyteller to create a memorable experience",
+          "c": "Selling merchandise"
+        },
+        "correct": "b",
+        "hint": "Think about what makes a tour truly engaging and memorable for a visitor."
+      },
+      {
+        "id": "q2",
+        "text": "When crafting a tour's narrative, what is most effective?",
+        "options": {
+          "a": "Listing as many dates as possible",
+          "b": "Focusing on the building's technical specifications",
+          "c": "Weaving human stories and the 'why' into your tour"
+        },
+        "correct": "c",
+        "hint": "People connect with stories about other people, not just abstract data."
+      },
+      {
+        "id": "q3",
+        "type": "essay",
+        "text": "In 2-3 sentences, how would you welcome a group of tourists to Hagonoy, making them feel excited about their visit?",
+        "suggestion": "<strong>Suggested Answer:</strong> 'Good morning and a warm welcome to Hagonoy, the vibrant heart of Bulacan's coastal life! We're about to explore a town where faith, history, and craftsmanship flow as richly as our waters. Get ready to discover the stories hidden within our historic church and the warmth of our local community.'"
+      }
+    ]
+  }
+}

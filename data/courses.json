@@ -1,0 +1,31 @@
+{
+  "courses": [
+    {
+      "id": "tour-guiding",
+      "title": "Fundamentals of Tour Guiding",
+      "description": "Learn the essential skills to become a knowledgeable and charismatic tour guide.",
+      "image": "https://placehold.co/400x200.png?text=Tour+Guide",
+      "dataFile": "data/course-tour-guiding.json",
+      "certificateTitle": "Fundamentals of Tour Guiding",
+      "certificateMessage": "Thank you for dedicating your time to learn the fundamentals of Tour Guiding."
+    },
+    {
+      "id": "bus-captain", 
+      "title": "Bus Captain",
+      "description": "Master passenger management, safety protocols, and route navigation.",
+      "image": "https://placehold.co/400x200.png?text=Bus+Captain",
+      "dataFile": "data/course-bus-captain.json",
+      "certificateTitle": "Bus Captain Training",
+      "certificateMessage": "Congratulations on completing Bus Captain training. Your dedication to passenger safety is commendable."
+    },
+    {
+      "id": "hotel-help-desk",
+      "title": "Hotel Help Desk",
+      "description": "Develop expertise in hotel front desk operations and guest services.",
+      "image": "https://placehold.co/400x200.png?text=Hotel+Help+Desk", 
+      "dataFile": "data/course-hotel-help-desk.json",
+      "certificateTitle": "Hotel Help Desk Operations",
+      "certificateMessage": "Well done on mastering hotel front desk operations and customer service excellence."
+    }
+  ]
+}

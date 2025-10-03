@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate of Completion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500&family=Poppins:wght@400;600;700&family=Satisfy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* A5 Landscape Certificate Size */
+        @media screen {
+            .certificate-body {
+                padding: 1rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+            }
+            
+            .certificate-wrapper {
+                max-width: 210mm; /* A5 landscape width */
+                margin: 0 auto;
+            }
+            
+            .certificate-container {
+                min-height: 148mm; /* A5 landscape height */
+                display: flex;
+                flex-direction: row;
+            }
+        }
+
+        @media print {
+            @page {
+                size: A5 landscape;
+                margin: 0;
+            }
+            
+            body, .certificate-body {
+                background: white;
+                margin: 0;
+                padding: 0;
+                width: 210mm; /* A5 landscape width */
+                height: 148mm; /* A5 landscape height */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .print-button-container {
+                display: none;
+            }
+            
+            .certificate-wrapper {
+                max-width: 100%;
+                width: 210mm;
+                height: 148mm;
+            }
+            
+            .certificate-container {
+                box-shadow: none;
+                border: 2px solid #333;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: row;
+            }
+        }
+
+        /* Horizontal layout adjustments */
+        .cert-left {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .cert-right {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            background: var(--bg-color);
+        }
+
+        .recipient-name {
+            font-size: 2.2rem;
+            margin: 1rem 0;
+        }
+        
+        .cert-left h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .course-title {
+            font-size: 1.4rem;
+            margin: 1rem 0;
+        }
+
+        .cert-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+        }
+    </style>
+</head>
+<body class="certificate-body">
+    <div class="certificate-wrapper">
+        <div class="certificate-container">
+            <div class="cert-left">
+                <!--<svg class="cert-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 4.529c2.349-2.109 5.979-2.039 8.242.228 2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.968.236-8.236 2.265-2.264 5.888-2.34 8.244-.228Z"></path></svg>-->
+                <h2>Appreciation for Completion</h2>
+                <p>We warmly congratulate you</p>
+                <h1 id="cert-name" class="recipient-name"></h1>
+                <p>for successfully completing the course of:</p>
+                <h3 id="course-title" class="course-title"></h3>
+            </div>
+            <div class="cert-right">
+                <p class="congrats-text" id="congrats-message"></p>
+                <div class="cert-footer">
+                    <div>
+                        <p><strong>Completion:</strong> <span id="cert-date"></span></p>
+                        <p><strong>Congregation:</strong> <span id="cert-congregation"></span></p>
+                        <p><strong>Volunteer Code:</strong> <span id="cert-code"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="print-button-container">
+            <button id="print-btn" class="button" aria-label="Print or Save as PDF">Print or Save as PDF</button>
+            <a href="course.html" class="button-secondary">Back to Course</a>
+            <a href="index.html" class="button-secondary">Return to Dashboard</a>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const currentCourseId = localStorage.getItem('lmsCurrentCourse');
+            
+            if (!currentCourseId) {
+                alert('No course selected. Please start from the dashboard.');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            try {
+                // Load course information dynamically
+                const coursesResponse = await fetch('data/courses.json');
+                if (!coursesResponse.ok) throw new Error('Failed to load courses');
+                const coursesData = await coursesResponse.json();
+                
+                const currentCourse = coursesData.courses.find(c => c.id === currentCourseId);
+                if (!currentCourse) throw new Error('Course not found');
+
+                // Check if user has completed all requirements
+                const progressKey = `lmsProgress_${currentCourseId}`;
+                const progress = JSON.parse(localStorage.getItem(progressKey)) || [];
+                
+                // Load course data to check completion requirements
+                const courseResponse = await fetch(currentCourse.dataFile);
+                if (!courseResponse.ok) throw new Error('Failed to load course data');
+                const courseData = await courseResponse.json();
+                
+                const allLessons = courseData.modules.flatMap(m => m.lessons.map(l => l.id));
+                const quizId = courseData.quiz.id;
+                const allRequired = [...allLessons, quizId];
+                const hasCompletedAll = allRequired.every(id => progress.includes(id));
+
+                if (!hasCompletedAll) {
+                    alert('Please complete all lessons and the final assessment before generating your certificate.');
+                    window.location.href = 'course.html';
+                    return;
+                }
+
+                // Populate certificate data
+                const firstName = localStorage.getItem('lmsUserFirstName') || 'Valued';
+                const lastName = localStorage.getItem('lmsUserLastName') || 'Participant';
+                const congregation = localStorage.getItem('lmsUserCongregation') || 'N/A';
+                const userCode = localStorage.getItem('lmsUserCode') || 'N/A';
+                const today = new Date();
+                const formattedDate = `${today.toLocaleString('default', { month: 'long' })} ${today.getDate()}, ${today.getFullYear()}`;
+
+                document.getElementById('cert-name').textContent = `${firstName} ${lastName}`;
+                document.getElementById('cert-code').textContent = userCode;
+                document.getElementById('cert-congregation').textContent = congregation;
+                document.getElementById('cert-date').textContent = formattedDate;
+                document.getElementById('course-title').textContent = currentCourse.certificateTitle || courseData.courseTitle;
+                document.getElementById('congrats-message').textContent = currentCourse.certificateMessage || 'Congratulations on completing the course!';
+
+                // Print button
+                document.getElementById('print-btn').addEventListener('click', () => {
+                    window.print();
+                });
+
+            } catch (error) {
+                alert('Error loading certificate: ' + error.message);
+                console.error('Certificate error:', error);
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IC2026 LMS Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>IC2026 E-Courses</h1>
+    </header>
+
+    <main class="dashboard-main">
+        <h2>Course Catalog</h2>
+        <div id="course-grid" class="course-grid">
+            <!-- Courses will be dynamically loaded from courses.json -->
+            <div class="loading">Loading courses...</div>
+        </div>
+        
+        <!-- Admin link (hidden from regular users) -->
+        <!--<div style="text-align: center; margin-top: 2rem;">
+            <a href="admin.html" class="button-secondary" style="font-size: 0.9rem;">Admin Panel</a>
+        </div>-->
+    </main>
+    
+    <script>
+        // Load courses dynamically from JSON file
+        async function loadCourses() {
+            try {
+                const response = await fetch('data/courses.json');
+                if (!response.ok) throw new Error('Failed to load courses');
+                const data = await response.json();
+                displayCourses(data.courses);
+            } catch (error) {
+                document.getElementById('course-grid').innerHTML = 
+                    '<div class="error-message">Error loading courses. Please check console.</div>';
+                console.error('Course loading error:', error);
+            }
+        }
+
+        function displayCourses(courses) {
+            const courseGrid = document.getElementById('course-grid');
+            
+            if (courses.length === 0) {
+                courseGrid.innerHTML = '<div class="no-courses">No courses available yet.</div>';
+                return;
+            }
+
+            courseGrid.innerHTML = courses.map(course => `
+                <div class="course-card">
+                    <img src="${course.image}" alt="${course.title} Banner" onerror="this.src='https://placehold.co/400x200.png?text=Course+Image'">
+                    <div class="card-content">
+                        <h3>${course.title}</h3>
+                        <p>${course.description}</p>
+                        <a href="start.html?course=${course.id}" class="button">Start Course</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', loadCourses);
+    </script>
+</body>
+</html>

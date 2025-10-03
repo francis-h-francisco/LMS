@@ -1,0 +1,53 @@
+{
+  "courseTitle": "Bus Captain Training",
+  "modules": [
+    {
+      "moduleTitle": "Module 1: Introduction to Bus Captain Role",
+      "lessons": [
+        {
+          "id": "m1l1",
+          "title": "1.1: Role and Responsibilities",
+          "content": [
+            {"type": "text", "data": "A Bus Captain is responsible for passenger safety, route navigation, and providing excellent customer service."},
+            {"type": "list", "data": ["Passenger safety and comfort", "Route adherence and timing", "Vehicle inspection and reporting", "Emergency procedures"]}
+          ]
+        },
+        {
+          "id": "m1l2",
+          "title": "1.2: Safety Protocols",
+          "content": [
+            {"type": "text", "data": "Safety is the top priority for every Bus Captain. Understanding and implementing safety protocols is essential."}
+          ]
+        }
+      ]
+    }
+  ],
+  "quiz": {
+    "id": "quiz",
+    "title": "Bus Captain Final Assessment",
+    "questions": [
+      {
+        "id": "q1",
+        "text": "What is the primary responsibility of a Bus Captain?",
+        "options": {
+          "a": "Driving as fast as possible",
+          "b": "Ensuring passenger safety and comfort",
+          "c": "Collecting maximum fares"
+        },
+        "correct": "b",
+        "hint": "Think about what matters most to passengers."
+      },
+      {
+        "id": "q2",
+        "text": "When should a Bus Captain perform vehicle inspection?",
+        "options": {
+          "a": "Only when problems occur",
+          "b": "At the beginning of each shift",
+          "c": "Once a week"
+        },
+        "correct": "b",
+        "hint": "Regular checks prevent accidents."
+      }
+    ]
+  }
+}

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS Admin Panel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .admin-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .stat-card {
+            background: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        .data-table th,
+        .data-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .data-table th {
+            background: var(--bg-color);
+            font-weight: 600;
+        }
+        .no-data {
+            text-align: center;
+            color: var(--text-color);
+            opacity: 0.7;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>IC2026 E-Courses - Admin Panel</h1>
+    </header>
+
+    <main class="admin-container">
+        <div class="admin-card">
+            <h2>Data Export</h2>
+            <p>Export all trainee data and quiz results as CSV files for analysis.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="total-records">0</div>
+                    <div>Total Records</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="unique-users">0</div>
+                    <div>Unique Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="completion-rate">0%</div>
+                    <div>Completion Rate</div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="export-csv" class="button">Export All Data as CSV</button>
+                <button id="export-json" class="button-secondary">Export as JSON</button>
+                <button id="clear-data" class="button-secondary" style="background-color: var(--danger-color);">Clear All Data</button>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <h2>Recent Activity</h2>
+            <div id="recent-activity">
+                <div class="no-data">No data available</div>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <h2>Course JSON Converter</h2>
+            <p>Convert CSV/spreadsheet data to course JSON format.</p>
+            <div class="action-buttons">
+                <a href="converter.html" class="button">Open Course Converter</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizResults = JSON.parse(localStorage.getItem('allQuizResults') || '[]');
+            
+            // Update stats
+            document.getElementById('total-records').textContent = quizResults.length;
+            
+            const uniqueUsers = new Set(quizResults.map(r => r.userCode)).size;
+            document.getElementById('unique-users').textContent = uniqueUsers;
+            
+            const passedCount = quizResults.filter(r => r.passed).length;
+            const completionRate = quizResults.length > 0 ? Math.round((passedCount / quizResults.length) * 100) : 0;
+            document.getElementById('completion-rate').textContent = completionRate + '%';
+            
+            // Update recent activity
+            updateRecentActivity(quizResults);
+            
+            // Export CSV
+            document.getElementById('export-csv').addEventListener('click', function() {
+                exportAllDataAsCSV();
+            });
+            
+            // Export JSON
+            document.getElementById('export-json').addEventListener('click', function() {
+                exportAllDataAsJSON();
+            });
+            
+            // Clear data
+            document.getElementById('clear-data').addEventListener('click', function() {
+                if (confirm('Are you sure you want to clear ALL data? This cannot be undone.')) {
+                    localStorage.removeItem('allQuizResults');
+                    localStorage.removeItem('tourGuidingLMSProgress');
+                    localStorage.removeItem('busCaptainLMSProgress');
+                    localStorage.removeItem('hotelHelpDeskLMSProgress');
+                    alert('All data cleared successfully.');
+                    location.reload();
+                }
+            });
+        });
+
+        function updateRecentActivity(quizResults) {
+            const recentContainer = document.getElementById('recent-activity');
+            
+            if (quizResults.length === 0) {
+                recentContainer.innerHTML = '<div class="no-data">No data available</div>';
+                return;
+            }
+            
+            // Sort by timestamp (newest first) and take top 10
+            const recent = quizResults
+                .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+                .slice(0, 10);
+            
+            let html = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Course</th>
+                            <th>Score</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            recent.forEach(result => {
+                const date = new Date(result.timestamp).toLocaleDateString();
+                const name = `${result.firstName} ${result.lastName}`;
+                const status = result.passed ? '✅ Passed' : '❌ Failed';
+                
+                html += `
+                    <tr>
+                        <td>${date}</td>
+                        <td>${name}</td>
+                        <td>${result.courseId}</td>
+                        <td>${result.score}/${result.totalQuestions}</td>
+                        <td>${status}</td>
+                    </tr>
+                `;
+            });
+            
+            html += '</tbody></table>';
+            recentContainer.innerHTML = html;
+        }
+
+        function exportAllDataAsCSV() {
+            const quizResults = JSON.parse(localStorage.getItem('allQuizResults') || '[]');
+            
+            if (quizResults.length === 0) {
+                alert('No data available to export.');
+                return;
+            }
+
+            // CSV Header
+            const csvHeader = 'Timestamp,FirstName,LastName,Congregation,UserCode,CourseID,Score,TotalQuestions,Percentage,Passed,Answers,CompletionTime\n';
+            
+            // Convert data to CSV rows
+            const csvContent = quizResults.map(result => 
+                [
+                    result.timestamp,
+                    `"${result.firstName}"`,
+                    `"${result.lastName}"`,
+                    `"${result.congregation}"`,
+                    `"${result.userCode}"`,
+                    result.courseId,
+                    result.score,
+                    result.totalQuestions,
+                    result.percentage,
+                    result.passed,
+                    `"${result.answers}"`,
+                    result.completionTime
+                ].join(',')
+            ).join('\n');
+            
+            const fullCSV = csvHeader + csvContent;
+            
+            // Create and trigger download
+            const blob = new Blob([fullCSV], { type: 'text/csv;charset=utf-8;' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `lms-data-export-${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            alert(`Exported ${quizResults.length} records successfully!`);
+        }
+
+        function exportAllDataAsJSON() {
+            const quizResults = JSON.parse(localStorage.getItem('allQuizResults') || '[]');
+            
+            if (quizResults.length === 0) {
+                alert('No data available to export.');
+                return;
+            }
+
+            const jsonData = JSON.stringify(quizResults, null, 2);
+            const blob = new Blob([jsonData], { type: 'application/json;charset=utf-8;' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `lms-data-export-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            alert(`Exported ${quizResults.length} records as JSON successfully!`);
+        }
+    </script>
+</body>
+</html>
