@@ -25,10 +25,10 @@
             {
               "type": "list",
               "data": [
-                "<strong>Apply</strong> core principles of adult learning to enhance volunteer training design.",
-                "<strong>Use</strong> the ABCD model to write clear, measurable, and learner-centered objectives.",
-                "<strong>Use</strong> a simple instructional design process to organize effective training modules.",
-                "<strong>Develop</strong> engaging and purposeful volunteer training modules aligned with learning goals."
+                "Apply core principles of adult learning to enhance volunteer training design.",
+                "Use the ABCD model to write clear, measurable, and learner-centered objectives.",
+                "Use a simple instructional design process to organize effective training modules.",
+                "Develop engaging and purposeful volunteer training modules aligned with learning goals."
               ]
             }
           ]
@@ -44,9 +44,9 @@
             {
               "type": "list",
               "data": [
-                "<strong>Unit 1:</strong> Adult Learning Principles",
-                "<strong>Unit 2:</strong> Writing Learning Objectives", 
-                "<strong>Unit 3:</strong> Simplified Instructional Design Model"
+                "Unit 1: Adult Learning Principles",
+                "Unit 2: Writing Learning Objectives",
+                "Unit 3: Simplified Instructional Design Model"
               ]
             }
           ]
@@ -57,7 +57,7 @@
       "moduleTitle": "Module 2: Practical Application",
       "lessons": [
         {
-          "id": "m2l1", 
+          "id": "m2l1",
           "title": "MS Teams Training - Part 1",
           "content": [
             {
@@ -82,18 +82,18 @@
           "title": "Practice Exercise: LFF Publication Analysis",
           "content": [
             {
-              "type": "text", 
+              "type": "text",
               "data": "Refer to the LFF publication and answer the following questions:"
             },
             {
               "type": "list",
               "data": [
                 "Where can you find the WIIFM (What's In It For Me)?",
-                "Provide some examples of <strong>Demonstrate</strong>",
-                "Provide some examples of <strong>Apply</strong>", 
-                "Provide examples of <strong>Knowledge Check</strong>",
-                "Why can we say that this lesson uses a <strong>Blended Approach</strong>?",
-                "What are some examples of <strong>Asynchronous Activities</strong>?"
+                "Provide some examples of Demonstrate",
+                "Provide some examples of Apply",
+                "Provide examples of Knowledge Check",
+                "Why can we say that this lesson uses a Blended Approach?",
+                "What are some examples of Asynchronous Activities?"
               ]
             },
             {
@@ -126,7 +126,7 @@
         "hint": "Think about the target audience mentioned in the purpose."
       },
       {
-        "id": "q2", 
+        "id": "q2",
         "text": "Which of these is NOT a learning objective from this course?",
         "options": {
           "a": "Apply core principles of adult learning",
@@ -138,7 +138,7 @@
       },
       {
         "id": "q3",
-        "type": "essay", 
+        "type": "essay",
         "text": "In your own words, explain why instructional design matters for volunteer training and provide one example of how you would apply these principles.",
         "suggestion": "Instructional design matters because it provides a structured framework that ensures training is effective, engaging, and meets learning objectives. For volunteer training, this means creating modules that are easy to follow, relevant to volunteers' roles, and help them quickly acquire needed skills. Example: Using the ABCD model to create clear objectives like 'After this training, volunteers will be able to demonstrate proper greeting techniques for convention attendees.'"
       }
