@@ -1,1 +1,147 @@
-
+{
+  "courseTitle": "Instructional Design",
+  "modules": [
+    {
+      "moduleTitle": "Module 1: Foundation of Instructional Design",
+      "lessons": [
+        {
+          "id": "m1l1",
+          "title": "Purpose of This Training",
+          "content": [
+            {
+              "type": "text",
+              "data": "This module will help equip participants to design effective and engaging training modules for convention volunteers by giving them a standard framework to follow."
+            }
+          ]
+        },
+        {
+          "id": "m1l2",
+          "title": "Learning Objectives",
+          "content": [
+            {
+              "type": "text",
+              "data": "By the end of the session, participants will be able to:"
+            },
+            {
+              "type": "list",
+              "data": [
+                "<strong>Apply</strong> core principles of adult learning to enhance volunteer training design.",
+                "<strong>Use</strong> the ABCD model to write clear, measurable, and learner-centered objectives.",
+                "<strong>Use</strong> a simple instructional design process to organize effective training modules.",
+                "<strong>Develop</strong> engaging and purposeful volunteer training modules aligned with learning goals."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m1l3",
+          "title": "Training Agenda",
+          "content": [
+            {
+              "type": "text",
+              "data": "Why Instructional Design Matters"
+            },
+            {
+              "type": "list",
+              "data": [
+                "<strong>Unit 1:</strong> Adult Learning Principles",
+                "<strong>Unit 2:</strong> Writing Learning Objectives", 
+                "<strong>Unit 3:</strong> Simplified Instructional Design Model"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleTitle": "Module 2: Practical Application",
+      "lessons": [
+        {
+          "id": "m2l1", 
+          "title": "MS Teams Training - Part 1",
+          "content": [
+            {
+              "type": "text",
+              "data": "Watch this video demonstration of MS Teams training:"
+            },
+            {
+              "type": "video",
+              "data": "https://drive.google.com/file/d/1ndQOzdbEPcXQQij_WQAp6iPey0cH2Jki/view"
+            },
+            {
+              "type": "tip",
+              "data": {
+                "summary": "Video Learning Tip",
+                "details": "As you watch this MS Teams training video, pay attention to how the instructor structures the content and engages the learners. This demonstrates effective instructional design in action."
+              }
+            }
+          ]
+        },
+        {
+          "id": "m2l2",
+          "title": "Practice Exercise: LFF Publication Analysis",
+          "content": [
+            {
+              "type": "text", 
+              "data": "Refer to the LFF publication and answer the following questions:"
+            },
+            {
+              "type": "list",
+              "data": [
+                "Where can you find the WIIFM (What's In It For Me)?",
+                "Provide some examples of <strong>Demonstrate</strong>",
+                "Provide some examples of <strong>Apply</strong>", 
+                "Provide examples of <strong>Knowledge Check</strong>",
+                "Why can we say that this lesson uses a <strong>Blended Approach</strong>?",
+                "What are some examples of <strong>Asynchronous Activities</strong>?"
+              ]
+            },
+            {
+              "type": "actions",
+              "data": {
+                "download": {
+                  "url": "#",
+                  "text": "Download LFF Publication (when available)"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "quiz": {
+    "id": "quiz",
+    "title": "Instructional Design Assessment",
+    "questions": [
+      {
+        "id": "q1",
+        "text": "What is the main purpose of this instructional design training?",
+        "options": {
+          "a": "To learn advanced computer programming",
+          "b": "To design effective training modules for convention volunteers",
+          "c": "To improve public speaking skills"
+        },
+        "correct": "b",
+        "hint": "Think about the target audience mentioned in the purpose."
+      },
+      {
+        "id": "q2", 
+        "text": "Which of these is NOT a learning objective from this course?",
+        "options": {
+          "a": "Apply core principles of adult learning",
+          "b": "Use the ABCD model for writing objectives",
+          "c": "Create complex software applications"
+        },
+        "correct": "c",
+        "hint": "Review the learning objectives list carefully."
+      },
+      {
+        "id": "q3",
+        "type": "essay", 
+        "text": "In your own words, explain why instructional design matters for volunteer training and provide one example of how you would apply these principles.",
+        "suggestion": "Instructional design matters because it provides a structured framework that ensures training is effective, engaging, and meets learning objectives. For volunteer training, this means creating modules that are easy to follow, relevant to volunteers' roles, and help them quickly acquire needed skills. Example: Using the ABCD model to create clear objectives like 'After this training, volunteers will be able to demonstrate proper greeting techniques for convention attendees.'"
+      }
+    ]
+  }
+}
