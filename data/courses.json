@@ -10,7 +10,7 @@
       "certificateMessage": "Thank you for dedicating your time to learn the fundamentals of Tour Guiding."
     },
     {
-      "id": "bus-captain", 
+      "id": "bus-captain",
       "title": "Bus Captain",
       "description": "Master passenger management, safety protocols, and route navigation.",
       "image": "https://placehold.co/400x200.png?text=Bus+Captain",
@@ -22,7 +22,7 @@
       "id": "hotel-help-desk",
       "title": "Hotel Help Desk",
       "description": "Develop expertise in hotel front desk operations and guest services.",
-      "image": "https://placehold.co/400x200.png?text=Hotel+Help+Desk", 
+      "image": "https://placehold.co/400x200.png?text=Hotel+Help+Desk",
       "dataFile": "data/course-hotel-help-desk.json",
       "certificateTitle": "Hotel Help Desk Operations",
       "certificateMessage": "Well done on mastering hotel front desk operations and customer service excellence."
@@ -37,5 +37,4 @@
       "certificateMessage": "Congratulations on mastering instructional design principles for effective volunteer training!"
     }
   ]
-
 }
