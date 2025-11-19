@@ -26,6 +26,16 @@
       "dataFile": "data/course-hotel-help-desk.json",
       "certificateTitle": "Hotel Help Desk Operations",
       "certificateMessage": "Well done on mastering hotel front desk operations and customer service excellence."
+    },
+    {
+      "id": "instructional-design",
+      "title": "Instructional Design",
+      "description": "Learn to design effective and engaging training modules for convention volunteers using proven frameworks.",
+      "image": "https://placehold.co/400x200.png?text=Instructional+Design",
+      "dataFile": "data/course-instructional-design.json",
+      "certificateTitle": "Instructional Design",
+      "certificateMessage": "Congratulations on mastering instructional design principles for effective volunteer training!"
     }
   ]
+
 }
