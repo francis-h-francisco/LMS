@@ -157,13 +157,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 let hasActions = false;
                 
                 // CONTENT RENDERING WITH VIDEO HELPER INTEGRATION
+                // In the buildCourseUI() function, update the content rendering:
                 lesson.content.forEach(item => {
                     switch(item.type) {
                         case 'text': 
                             // Check if it's a video button trigger
-                            if (item.data && item.data.startsWith('VIDEO_BUTTON:')) {
+                            if (item.data && item.data.includes('VIDEO_BUTTON:')) {
                                 try {
-                                    const videoConfig = JSON.parse(item.data.replace('VIDEO_BUTTON:', ''));
+                                    const videoJson = item.data.split('VIDEO_BUTTON:')[1];
+                                    const videoConfig = JSON.parse(videoJson);
                                     panelHTML += createVideoButton(videoConfig);
                                 } catch (e) {
                                     console.error('Invalid video configuration:', e);
@@ -176,21 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         case 'list': 
                             panelHTML += `<ul>${item.data.map(li => `<li>${li}</li>`).join('')}</ul>`; 
                             break;
-                        case 'video': 
-                            // Existing direct video embed (for YouTube)
-                            panelHTML += `<div class="video-container"><iframe src="${item.data}" frameborder="0" allowfullscreen></iframe></div>`;
-                            break;
-                        case 'tip': 
-                            panelHTML += `<details class="tip-box"><summary>${item.data.summary}</summary><div>${item.data.details}</div></details>`; 
-                            break;
-                        case 'actions':
-                            hasActions = true;
-                            panelHTML += `<div class="action-buttons">`;
-                            if(item.data.download) {
-                                panelHTML += `<a href="${item.data.download.url}" download class="button-secondary">${item.data.download.text}</a>`;
-                            }
-                            panelHTML += `<button class="button complete-btn" data-lesson-id="${lesson.id}">Mark as Complete</button></div>`;
-                            break;
+                        // ... rest of cases
                     }
                 });
                 
@@ -921,3 +909,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initializeCourse();
 });
+
