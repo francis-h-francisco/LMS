@@ -66,7 +66,7 @@
             },
             {
               "type": "text", 
-              "data": "<script>document.write(getVideoEmbed('1ndQOzdbEPcXQQij_WQAp6iPey0cH2Jki', 'MS Teams Training Part 1'))</script>"
+              "data": "<div id='ms-teams-video-container'></div><script>document.getElementById('ms-teams-video-container').innerHTML = getVideoEmbed('1ndQOzdbEPcXQQij_WQAp6iPey0cH2Jki', 'MS Teams Training Part 1');</script>"
             },
             {
               "type": "tip",
