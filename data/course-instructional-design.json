@@ -1,5 +1,5 @@
 {
-  "courseTitle": "Instructional Design",
+  "courseTitle": "Instructional Design Fundamentals",
   "modules": [
     {
       "moduleTitle": "Module 1: Foundation of Instructional Design",
@@ -11,11 +11,15 @@
             {
               "type": "text",
               "data": "This module will help equip participants to design effective and engaging training modules for convention volunteers by giving them a standard framework to follow."
+            },
+            {
+              "type": "text",
+              "data": "VIDEO_BUTTON:{\"id\": \"1abc123def456\", \"title\": \"Welcome to Instructional Design\", \"lesson\": \"m1l1\", \"description\": \"Introduction to the course and overview of what instructional design can do for your training programs.\"}"
             }
           ]
         },
         {
-          "id": "m1l2", 
+          "id": "m1l2",
           "title": "1.2: Learning Objectives",
           "content": [
             {
@@ -25,11 +29,15 @@
             {
               "type": "list",
               "data": [
-                "Apply core principles of adult learning to enhance volunteer training design.",
-                "Use the ABCD model to write clear, measurable, and learner-centered objectives.", 
-                "Use a simple instructional design process to organize effective training modules.",
-                "Develop engaging and purposeful volunteer training modules aligned with learning goals."
+                "<strong>Apply</strong> core principles of adult learning to enhance volunteer training design.",
+                "<strong>Use</strong> the ABCD model to write clear, measurable, and learner-centered objectives.",
+                "<strong>Use</strong> a simple instructional design process to organize effective training modules.",
+                "<strong>Develop</strong> engaging and purposeful volunteer training modules aligned with learning goals."
               ]
+            },
+            {
+              "type": "text",
+              "data": "VIDEO_BUTTON:{\"id\": \"2def456ghi789\", \"title\": \"Writing Effective Learning Objectives\", \"lesson\": \"m1l2\", \"description\": \"Learn how to create clear, measurable learning objectives using the ABCD model.\"}"
             }
           ]
         },
@@ -38,15 +46,17 @@
           "title": "1.3: Training Agenda",
           "content": [
             {
-              "type": "text", 
+              "type": "text",
               "data": "Why Instructional Design Matters"
             },
             {
               "type": "list",
               "data": [
-                "Unit 1: Adult Learning Principles",
-                "Unit 2: Writing Learning Objectives",
-                "Unit 3: Simplified Instructional Design Model"
+                "<strong>Unit 1:</strong> Adult Learning Principles",
+                "<strong>Unit 2:</strong> Writing Learning Objectives", 
+                "<strong>Unit 3:</strong> Simplified Instructional Design Model",
+                "<strong>Unit 4:</strong> Assessment Strategies",
+                "<strong>Unit 5:</strong> Practical Application"
               ]
             }
           ]
@@ -54,56 +64,180 @@
       ]
     },
     {
-      "moduleTitle": "Module 2: Practical Application",
+      "moduleTitle": "Module 2: Adult Learning Principles",
       "lessons": [
         {
           "id": "m2l1",
-          "title": "2.1: MS Teams Training - Part 1", 
+          "title": "2.1: Understanding Adult Learners",
           "content": [
             {
               "type": "text",
-              "data": "Watch this video demonstration of MS Teams training:"
+              "data": "Adults learn differently than children. Understanding these differences is crucial for effective training design."
             },
             {
-              "type": "text", 
-              "data": "<script>document.write(createVideoButton({id: '1ndQOzdbEPcXQQij_WQAp6iPey0cH2Jki', title: 'MS Teams Training Part 1', course: 'instructional-design', lesson: 'm2l1', description: 'Learn how to effectively use MS Teams for training purposes and team collaboration.'}))</script>"
+              "type": "list",
+              "data": [
+                "Adults are self-directed and autonomous",
+                "They bring life experiences and knowledge to learning",
+                "Adults are goal-oriented and relevancy-oriented",
+                "They are practical and focused on real-world application"
+              ]
             },
             {
-              "type": "tip",
-              "data": {
-                "summary": "Video Learning Tip",
-                "details": "As you watch this MS Teams training video, pay attention to how the instructor structures the content and engages the learners. This demonstrates effective instructional design in action."
-              }
+              "type": "text",
+              "data": "VIDEO_BUTTON:{\"id\": \"3ghi789jkl012\", \"title\": \"Andragogy: Adult Learning Principles\", \"lesson\": \"m2l1\", \"description\": \"Explore the key principles of adult learning theory and how to apply them in your training design.\"}"
             }
           ]
         },
         {
           "id": "m2l2",
-          "title": "2.2: Practice Exercise: LFF Publication Analysis",
+          "title": "2.2: Learning Styles & Preferences",
           "content": [
             {
               "type": "text",
-              "data": "Refer to the LFF publication and answer the following questions:"
+              "data": "People have different preferences for how they receive and process information."
             },
             {
-              "type": "list", 
+              "type": "list",
               "data": [
-                "Where can you find the WIIFM (What's In It For Me)?",
-                "Provide some examples of Demonstrate",
-                "Provide some examples of Apply",
-                "Provide examples of Knowledge Check", 
-                "Why can we say that this lesson uses a Blended Approach?",
-                "What are some examples of Asynchronous Activities?"
+                "Visual learners (see the information)",
+                "Auditory learners (hear the information)", 
+                "Kinesthetic learners (hands-on experience)",
+                "Reading/Writing learners (text-based materials)"
               ]
+            },
+            {
+              "type": "tip",
+              "data": {
+                "summary": "Design Tip: Multiple Modalities",
+                "details": "Include a mix of visual, auditory, and hands-on activities to engage all types of learners in your training sessions."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleTitle": "Module 3: The ABCD Model",
+      "lessons": [
+        {
+          "id": "m3l1",
+          "title": "3.1: ABCD Components",
+          "content": [
+            {
+              "type": "text",
+              "data": "The ABCD model provides a framework for writing clear, measurable learning objectives."
+            },
+            {
+              "type": "list",
+              "data": [
+                "<strong>A</strong> - Audience: Who is the learner?",
+                "<strong>B</strong> - Behavior: What will they be able to do?",
+                "<strong>C</strong> - Condition: Under what conditions?",
+                "<strong>D</strong> - Degree: How well must they perform?"
+              ]
+            },
+            {
+              "type": "text",
+              "data": "VIDEO_BUTTON:{\"id\": \"4jkl012mno345\", \"title\": \"Mastering the ABCD Model\", \"lesson\": \"m3l1\", \"description\": \"Step-by-step guide to creating effective learning objectives using the ABCD framework.\"}"
+            }
+          ]
+        },
+        {
+          "id": "m3l2",
+          "title": "3.2: Writing Practice",
+          "content": [
+            {
+              "type": "text",
+              "data": "Let's practice writing ABCD objectives for volunteer training scenarios."
+            },
+            {
+              "type": "text",
+              "data": "<strong>Example:</strong> 'After this training (Condition), convention volunteers (Audience) will be able to demonstrate (Behavior) proper greeting techniques with 100% accuracy (Degree).'"
             },
             {
               "type": "actions",
               "data": {
                 "download": {
                   "url": "#",
-                  "text": "Download LFF Publication (when available)"
+                  "text": "Download ABCD Worksheet"
                 }
               }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleTitle": "Module 4: Practical Application",
+      "lessons": [
+        {
+          "id": "m4l1",
+          "title": "4.1: MS Teams Training - Part 1",
+          "content": [
+            {
+              "type": "text",
+              "data": "Watch this video demonstration of MS Teams training and analyze the instructional design elements:"
+            },
+            {
+              "type": "text",
+              "data": "VIDEO_BUTTON:{\"id\": \"1ndQOzdbEPcXQQij_WQAp6iPey0cH2Jki\", \"title\": \"MS Teams Training Demonstration\", \"lesson\": \"m4l1\", \"description\": \"Real-world example of effective training design using MS Teams platform.\"}"
+            },
+            {
+              "type": "tip",
+              "data": {
+                "summary": "Analysis Exercise",
+                "details": "As you watch, identify: 1) The learning objectives, 2) How adult learning principles are applied, 3) The assessment strategies used."
+              }
+            }
+          ]
+        },
+        {
+          "id": "m4l2",
+          "title": "4.2: Practice Exercise: LFF Publication Analysis",
+          "content": [
+            {
+              "type": "text", 
+              "data": "Refer to the LFF publication and answer the following questions:"
+            },
+            {
+              "type": "list",
+              "data": [
+                "Where can you find the WIIFM (What's In It For Me)?",
+                "Provide some examples of <strong>Demonstrate</strong> activities",
+                "Provide some examples of <strong>Apply</strong> activities", 
+                "Provide examples of <strong>Knowledge Check</strong> elements",
+                "Why can we say that this lesson uses a <strong>Blended Approach</strong>?",
+                "What are some examples of <strong>Asynchronous Activities</strong>?"
+              ]
+            },
+            {
+              "type": "text",
+              "data": "VIDEO_BUTTON:{\"id\": \"5mno345pqr678\", \"title\": \"LFF Publication Walkthrough\", \"lesson\": \"m4l2\", \"description\": \"Detailed analysis of instructional design elements in the LFF publication.\"}"
+            }
+          ]
+        },
+        {
+          "id": "m4l3",
+          "title": "4.3: Design Your Own Module",
+          "content": [
+            {
+              "type": "text",
+              "data": "Now it's your turn! Design a 30-minute training module for convention volunteers using the principles we've learned."
+            },
+            {
+              "type": "list",
+              "data": [
+                "Choose a specific volunteer role (greeter, usher, information desk)",
+                "Write 2-3 ABCD learning objectives",
+                "Outline the content and activities",
+                "Include at least one assessment method",
+                "Consider different learning styles"
+              ]
+            },
+            {
+              "type": "text",
+              "data": "VIDEO_BUTTON:{\"id\": \"6pqr678stu901\", \"title\": \"Module Design Workshop\", \"lesson\": \"m4l3\", \"description\": \"Step-by-step guidance for designing your own training module from scratch.\"}"
             }
           ]
         }
@@ -112,35 +246,73 @@
   ],
   "quiz": {
     "id": "quiz",
-    "title": "Final Assessment", 
+    "title": "Instructional Design Assessment",
     "questions": [
       {
         "id": "q1",
-        "text": "What is the main purpose of this instructional design training?",
+        "text": "What is the main purpose of instructional design training for convention volunteers?",
         "options": {
           "a": "To learn advanced computer programming",
-          "b": "To design effective training modules for convention volunteers", 
-          "c": "To improve public speaking skills"
+          "b": "To design effective training modules for convention volunteers",
+          "c": "To improve public speaking skills",
+          "d": "To manage event logistics"
         },
         "correct": "b",
-        "hint": "Think about the target audience mentioned in the purpose."
+        "hint": "Think about the target audience and practical application mentioned throughout the course."
       },
       {
-        "id": "q2",
-        "text": "Which of these is NOT a learning objective from this course?",
+        "id": "q2", 
+        "text": "Which of these is NOT a component of the ABCD model?",
         "options": {
-          "a": "Apply core principles of adult learning",
-          "b": "Use the ABCD model for writing objectives", 
-          "c": "Create complex software applications"
+          "a": "Audience, Behavior, Condition, Degree",
+          "b": "Action, Background, Content, Delivery", 
+          "c": "All of the above are correct",
+          "d": "None of the above are correct"
         },
-        "correct": "c",
-        "hint": "Review the learning objectives list carefully."
+        "correct": "b",
+        "hint": "Review the ABCD components in Module 3."
       },
       {
         "id": "q3",
-        "type": "essay",
-        "text": "In your own words, explain why instructional design matters for volunteer training and provide one example of how you would apply these principles.",
-        "suggestion": "Instructional design matters because it provides a structured framework that ensures training is effective, engaging, and meets learning objectives. For volunteer training, this means creating modules that are easy to follow, relevant to volunteers' roles, and help them quickly acquire needed skills. Example: Using the ABCD model to create clear objectives like 'After this training, volunteers will be able to demonstrate proper greeting techniques for convention attendees.'"
+        "text": "What does WIIFM stand for in instructional design?",
+        "options": {
+          "a": "What's In It For Me?",
+          "b": "When Is Information For Members?",
+          "c": "Where Is Important Formative Material?",
+          "d": "Why Include Formal Methods?"
+        },
+        "correct": "a",
+        "hint": "This addresses the learner's motivation and relevance."
+      },
+      {
+        "id": "q4",
+        "text": "Which learning principle emphasizes that adults bring existing knowledge to new learning situations?",
+        "options": {
+          "a": "Self-directed learning",
+          "b": "Experience foundation", 
+          "c": "Goal orientation",
+          "d": "Practical focus"
+        },
+        "correct": "b",
+        "hint": "Think about how adults' life experiences affect their learning."
+      },
+      {
+        "id": "q5",
+        "type": "essay", 
+        "text": "Design one ABCD learning objective for a convention volunteer training session and explain how each component (A, B, C, D) is addressed in your objective.",
+        "suggestion": "<strong>Example Answer:</strong> 'After completing the safety protocol training (Condition), convention ushers (Audience) will be able to demonstrate (Behavior) proper emergency evacuation procedures with 100% accuracy (Degree).' \n\n<strong>Explanation:</strong> \n- <strong>Audience:</strong> Convention ushers (specific learner group)\n- <strong>Behavior:</strong> Demonstrate evacuation procedures (observable action)\n- <strong>Condition:</strong> After safety protocol training (context)\n- <strong>Degree:</strong> 100% accuracy (measurable standard)"
+      },
+      {
+        "id": "q6",
+        "text": "What is the primary advantage of using video content in volunteer training?",
+        "options": {
+          "a": "It eliminates the need for in-person training",
+          "b": "It provides consistent, reusable demonstration of procedures",
+          "c": "It's cheaper than other methods",
+          "d": "It requires no preparation time"
+        },
+        "correct": "b",
+        "hint": "Consider the benefits of visual demonstration and consistency across multiple training sessions."
       }
     ]
   }
