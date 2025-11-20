@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressKey = `lmsProgress_${currentCourseId}`;
 
     // --- GOOGLE SHEETS CONFIGURATION ---
-    // YOUR ACTUAL GOOGLE WEB APP URL
     const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwrv6v7pUs9f_8EXIp5L7b2n9gy5zggQhz79O59y1HQ_0wTX2EBP9gtSyQlpUcJUodjnQ/exec';
 
     // Mobile navigation elements
@@ -24,6 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileNavClose = document.querySelector('.mobile-nav-close');
     const mobileNavMenu = document.querySelector('.mobile-nav-menu');
     const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+
+    // --- SAFE JSON PARSING UTILITY ---
+    function safeJSONParse(str, fallback = []) {
+        try {
+            return JSON.parse(str) || fallback;
+        } catch (e) {
+            console.warn('JSON parse error, using fallback:', e);
+            return fallback;
+        }
+    }
 
     // --- INITIALIZATION ---
     async function initializeCourse() {
@@ -86,7 +95,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     switch(item.type) {
                         case 'text': panelHTML += `<p>${item.data}</p>`; break;
                         case 'list': panelHTML += `<ul>${item.data.map(li => `<li>${li}</li>`).join('')}</ul>`; break;
-                        case 'video': panelHTML += `<div class="video-container"><iframe src="${item.data}" frameborder="0" allowfullscreen></iframe></div>`; break;
+                        case 'video': 
+                            // Use button approach instead of iframe to avoid CORB
+                            panelHTML += `<div style="text-align: center; padding: 2rem; background: #f8f9fa; border-radius: 8px;">
+                                <p>Click the button below to watch the video:</p>
+                                <a href="${item.data}" target="_blank" class="button" style="display: inline-block; margin: 1rem;">🎬 Watch Video</a>
+                            </div>`;
+                            break;
                         case 'tip': panelHTML += `<details class="tip-box"><summary>${item.data.summary}</summary><div>${item.data.details}</div></details>`; break;
                         case 'actions':
                             hasActions = true;
@@ -265,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LOGIC ---
     function getProgress() {
-        return JSON.parse(localStorage.getItem(progressKey)) || [];
+        return safeJSONParse(localStorage.getItem(progressKey), []);
     }
 
     function saveProgress(lessonId) {
@@ -542,7 +557,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // CORS-friendly data submission
     async function sendDataCORSFriendly(data) {
-        // Method 1: Try no-cors fetch (request goes through but we can't read response)
+        // Method 1: Try no-cors fetch
         try {
             await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
                 method: 'POST',
@@ -553,12 +568,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify(data)
             });
             console.log('Data sent via no-cors fetch');
-            return true; // Assume success since we can't check response
+            return true;
         } catch (error) {
             console.log('No-cors fetch failed, trying alternative...');
         }
 
-        // Method 2: Use form submission (bypasses CORS completely)
+        // Method 2: Use form submission
         try {
             const formSuccess = await submitViaForm(data);
             if (formSuccess) return true;
@@ -566,7 +581,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Form submission failed:', error);
         }
 
-        // Method 3: Use beacon (fire-and-forget)
+        // Method 3: Use beacon
         try {
             const beaconSuccess = submitViaBeacon(data);
             if (beaconSuccess) return true;
@@ -603,7 +618,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             document.body.appendChild(form);
 
-            // Set timeout to resolve (we can't reliably detect form submission completion)
+            // Set timeout to resolve
             setTimeout(() => {
                 document.body.removeChild(form);
                 document.body.removeChild(iframe);
@@ -657,21 +672,21 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         
         // Save to localStorage (backup)
-        let allQuizResults = JSON.parse(localStorage.getItem('allQuizResults') || '[]');
+        let allQuizResults = safeJSONParse(localStorage.getItem('allQuizResults'), []);
         allQuizResults.push(userData);
         localStorage.setItem('allQuizResults', JSON.stringify(allQuizResults));
         
         // Also store individual completion for easy export
         localStorage.setItem('latestCompletion', JSON.stringify(userData));
         
-        // Save to Google Sheets (primary) - this will work despite CORS warnings
+        // Save to Google Sheets (primary)
         sendToGoogleSheets(userData);
         
         console.log('Quiz results saved:', userData);
     }
 
     function exportIndividualCompletion() {
-        const completion = JSON.parse(localStorage.getItem('latestCompletion') || '{}');
+        const completion = safeJSONParse(localStorage.getItem('latestCompletion'), {});
         
         if (!completion.timestamp) {
             alert('No completion data found. Please complete a course first.');
@@ -807,19 +822,16 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         
         try {
-            // Use the same CORS-friendly method as the main app
             const success = await sendDataCORSFriendly(testData);
             
             if (success) {
-                alert('✅ Test data sent to Google Sheets!\n\nEven with CORS warnings, the data usually saves successfully.\n\nCheck your Google Sheet for new rows.');
-                // Open the sheet for verification
-                window.open('https://docs.google.com/spreadsheets/d/1aSwsuEd9quw0cHwmg_k8LZAtDeOKZFHyFMxWs7BAWWE/edit', '_blank');
+                alert('✅ Test data sent to Google Sheets!');
             } else {
-                alert('❌ Test failed. But try completing a real course - it might still work!');
+                alert('❌ Test failed.');
             }
         } catch (error) {
             console.error('Test error:', error);
-            alert('❌ Test error: ' + error.message + '\n\nBut the real course completion might still work!');
+            alert('❌ Test error: ' + error.message);
         }
     };
 
