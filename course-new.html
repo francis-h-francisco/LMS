@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course - Safe Version</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- NO CSP META TAGS -->
+</head>
+<body>
+    <div class="course-container">
+        <nav class="course-nav">
+            <h3>IC2026 E-Courses</h3>
+            <h3 id="welcome-user">Welcome!</h3>
+            <a href="index.html" class="back-link">← Back to Dashboard</a>
+            <ul id="course-navigation-list"></ul>
+        </nav>
+
+        <main id="course-content-area" class="course-content">
+            <div class="progress-container">
+                <div class="progress-bar-outline">
+                    <div id="progressBar" class="progress-bar" style="width: 0%">0%</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // SUPER SIMPLE VERSION - NO EVAL, NO CSP ISSUES
+        console.log('=== FRESH START ===');
+        
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // Basic checks
+                const user = localStorage.getItem('lmsUserFirstName');
+                if (!user) {
+                    window.location.href = 'start.html';
+                    return;
+                }
+                
+                document.getElementById('welcome-user').textContent = `Welcome, ${user}!`;
+                
+                // Load course data
+                const courseId = localStorage.getItem('lmsCurrentCourse') || 'instructional-design';
+                const coursesResponse = await fetch('data/courses.json');
+                const coursesData = await coursesResponse.json();
+                const currentCourse = coursesData.courses.find(c => c.id === courseId);
+                
+                if (!currentCourse) throw new Error('Course not found');
+                
+                const courseResponse = await fetch(currentCourse.dataFile);
+                const courseData = await courseResponse.json();
+                
+                // Build simple UI
+                buildSimpleCourse(courseData, courseId);
+                
+            } catch (error) {
+                document.getElementById('course-content-area').innerHTML = 
+                    `<h2>Error</h2><p>${error.message}</p>`;
+                console.error('Error:', error);
+            }
+        });
+
+        function buildSimpleCourse(courseData, courseId) {
+            const progressKey = `progress_${courseId}`;
+            const navList = document.getElementById('course-navigation-list');
+            const contentArea = document.getElementById('course-content-area');
+            
+            // Safe JSON parse
+            function safeParse(str, fallback = []) {
+                try {
+                    return JSON.parse(str) || fallback;
+                } catch {
+                    return fallback;
+                }
+            }
+            
+            // Get progress
+            const progress = safeParse(localStorage.getItem(progressKey), []);
+            
+            // Welcome panel
+            contentArea.innerHTML += `
+                <div id="welcome" class="content-panel active">
+                    <h2>Welcome to ${courseData.courseTitle}</h2>
+                    <button onclick="startFirstLesson()" class="button">Start Learning</button>
+                </div>
+            `;
+            
+            // Build modules and lessons
+            courseData.modules.forEach((module, moduleIndex) => {
+                navList.innerHTML += `<li class="module-title">${module.moduleTitle}</li>`;
+                
+                module.lessons.forEach((lesson, lessonIndex) => {
+                    const lessonId = `m${moduleIndex + 1}l${lessonIndex + 1}`;
+                    const isCompleted = progress.includes(lessonId);
+                    const isAccessible = lessonIndex === 0 || progress.includes(`m${moduleIndex + 1}l${lessonIndex}`);
+                    
+                    // Navigation
+                    navList.innerHTML += `
+                        <li>
+                            <a href="#" class="lesson-link ${isAccessible ? '' : 'disabled'}" 
+                               onclick="showLesson('${lessonId}')" 
+                               data-content="${lessonId}">
+                                <span class="status-icon ${isCompleted ? 'completed' : ''}"></span>
+                                <span class="lesson-title">${lesson.title}</span>
+                            </a>
+                        </li>
+                    `;
+                    
+                    // Content panel
+                    let contentHTML = `<div id="${lessonId}" class="content-panel"><h2>${lesson.title}</h2>`;
+                    
+                    lesson.content.forEach(item => {
+                        switch(item.type) {
+                            case 'text':
+                                contentHTML += `<p>${item.data}</p>`;
+                                break;
+                            case 'list':
+                                contentHTML += `<ul>${item.data.map(li => `<li>${li}</li>`).join('')}</ul>`;
+                                break;
+                            case 'video':
+                                contentHTML += `
+                                    <div style="text-align: center; padding: 2rem;">
+                                        <a href="${item.data}" target="_blank" class="button">🎬 Watch Video</a>
+                                    </div>
+                                `;
+                                break;
+                        }
+                    });
+                    
+                    contentHTML += `
+                        <div class="action-buttons">
+                            <button onclick="completeLesson('${lessonId}')" class="button">Mark Complete</button>
+                        </div>
+                    </div>`;
+                    
+                    contentArea.innerHTML += contentHTML;
+                });
+            });
+            
+            // Quiz
+            const quiz = courseData.quiz;
+            const allLessonsCompleted = courseData.modules.every(module => 
+                module.lessons.every((_, i) => 
+                    progress.includes(`m${courseData.modules.indexOf(module) + 1}l${i + 1}`)
+                )
+            );
+            
+            navList.innerHTML += `
+                <li class="module-title">Final Assessment</li>
+                <li>
+                    <a href="#" class="lesson-link ${allLessonsCompleted ? '' : 'disabled'}" 
+                       onclick="showLesson('quiz')" 
+                       data-content="quiz">
+                        <span class="status-icon"></span>
+                        <span class="lesson-title">${quiz.title}</span>
+                    </a>
+                </li>
+            `;
+            
+            // Quiz content
+            let quizHTML = `<div id="quiz" class="content-panel"><h2>${quiz.title}</h2><form>`;
+            quiz.questions.forEach((q, i) => {
+                quizHTML += `<div><p><strong>${q.text}</strong></p>`;
+                if (q.options) {
+                    Object.entries(q.options).forEach(([key, value]) => {
+                        quizHTML += `<label><input type="radio" name="q${i}" value="${key}"> ${value}</label><br>`;
+                    });
+                }
+                quizHTML += `</div>`;
+            });
+            quizHTML += `<button type="button" onclick="submitQuiz()" class="button">Submit Quiz</button></form></div>`;
+            contentArea.innerHTML += quizHTML;
+            
+            updateProgressBar(progress, courseData);
+        }
+
+        // Global functions (safe approach)
+        window.startFirstLesson = function() {
+            const firstLesson = document.querySelector('.lesson-link:not(.disabled)');
+            if (firstLesson) firstLesson.click();
+        };
+
+        window.showLesson = function(lessonId) {
+            // Hide all panels
+            document.querySelectorAll('.content-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            // Show selected panel
+            const panel = document.getElementById(lessonId);
+            if (panel) panel.classList.add('active');
+            
+            // Update active nav
+            document.querySelectorAll('.lesson-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            const activeLink = document.querySelector(`[data-content="${lessonId}"]`);
+            if (activeLink) activeLink.classList.add('active');
+        };
+
+        window.completeLesson = function(lessonId) {
+            const courseId = localStorage.getItem('lmsCurrentCourse') || 'instructional-design';
+            const progressKey = `progress_${courseId}`;
+            const progress = JSON.parse(localStorage.getItem(progressKey) || '[]');
+            
+            if (!progress.includes(lessonId)) {
+                progress.push(lessonId);
+                localStorage.setItem(progressKey, JSON.stringify(progress));
+                alert('Lesson completed!');
+                location.reload(); // Simple refresh to update UI
+            }
+        };
+
+        window.submitQuiz = function() {
+            alert('Quiz submitted! (Functionality to be added)');
+        };
+
+        function updateProgressBar(progress, courseData) {
+            const totalLessons = courseData.modules.reduce((total, module) => total + module.lessons.length, 0) + 1;
+            const completed = progress.length;
+            const percentage = (completed / totalLessons) * 100;
+            
+            const progressBar = document.getElementById('progressBar');
+            if (progressBar) {
+                progressBar.style.width = `${percentage}%`;
+                progressBar.textContent = `${Math.round(percentage)}%`;
+            }
+        }
+    </script>
+</body>
+</html>
