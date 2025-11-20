@@ -69,6 +69,10 @@
               "data": "<div id='ms-teams-video-container'></div><script>document.getElementById('ms-teams-video-container').innerHTML = getVideoEmbed('1ndQOzdbEPcXQQij_WQAp6iPey0cH2Jki', 'MS Teams Training Part 1');</script>"
             },
             {
+              "type": "text", 
+              "data": "<div style='text-align: center; margin: 2rem 0;'><h4>MS Teams Training Part 1</h4><video controls width='100%' style='max-width: 800px; border-radius: 8px;' onerror='showVideoFallback(this)'><source src='https://drive.google.com/uc?export=download&id=1ndQOzdbEPcXQQij_WQAp6iPey0cH2Jki' type='video/mp4'>Your browser doesn't support HTML5 video.</video><div class='video-fallback' style='display: none; margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px;'><a href='https://drive.google.com/file/d/1ndQOzdbEPcXQQij_WQAp6iPey0cH2Jki/view' class='button'>Watch on Google Drive</a></div><script>function showVideoFallback(video) { video.style.display = 'none'; video.nextElementSibling.style.display = 'block'; }</script></div>"
+            },
+            {
               "type": "tip",
               "data": {
                 "summary": "Video Learning Tip",
