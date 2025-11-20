@@ -66,7 +66,7 @@
             },
             {
               "type": "text",
-              "data": "<div style='text-align: center; padding: 2rem; background: #f8f9fa; border-radius: 8px;'><h4>MS Teams Training Part 1</h4><p>Click the button below to watch the training video:</p><a href='https://drive.google.com/file/d/1ndQOzdbEPcXQQij_WQAp6iPey0cH2Jki/view' target='_blank' class='button' style='display: inline-block; margin: 1rem;'>🎬 Watch Video on Google Drive</a></div>"
+              "data": "<div style='text-align: center; padding: 2rem; background: #f8f9fa; border-radius: 8px;'><h4>MS Teams Training Part 1</h4><p>Click the button below to watch the training video:</p><a href='https://drive.google.com/file/d/1ndQOzdbEPcXQQij_WQAp6iPey0cH2Jki/view' target='_blank' class='button'>🎬 Watch Video on Google Drive</a></div>"
             },
             {
               "type": "tip",
