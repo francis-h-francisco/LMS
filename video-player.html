@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player - IC2026 E-Courses</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .video-player-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .video-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .video-wrapper {
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .video-wrapper iframe {
+            width: 100%;
+            height: 60vh;
+            border: none;
+        }
+        .video-info {
+            background: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .video-wrapper iframe {
+                height: 40vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-player-container">
+        <div class="video-header">
+            <h1 id="video-title">Loading...</h1>
+            <button id="back-button" class="button">&larr; Back to Course</button>
+        </div>
+        
+        <div class="video-wrapper">
+            <iframe id="video-frame" allowfullscreen></iframe>
+        </div>
+        
+        <div class="video-info">
+            <h3>About This Video</h3>
+            <p id="video-description">Loading video information...</p>
+        </div>
+    </div>
+
+    <script>
+        // Get all URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Extract video data from URL
+        const videoData = {
+            id: urlParams.get('id'),
+            title: decodeURIComponent(urlParams.get('title') || 'Training Video'),
+            course: urlParams.get('course'),
+            lesson: urlParams.get('lesson'),
+            description: decodeURIComponent(urlParams.get('desc') || 'Watch this training video to enhance your learning experience.')
+        };
+
+        // Validate required parameters
+        if (!videoData.id) {
+            document.getElementById('video-title').textContent = 'Error: No Video Specified';
+            document.getElementById('video-description').textContent = 'Please return to the course and try again.';
+            return;
+        }
+
+        // Set up the page
+        document.getElementById('video-title').textContent = videoData.title;
+        document.getElementById('video-description').textContent = videoData.description;
+        
+        // Load Google Drive embed
+        const embedUrl = `https://drive.google.com/file/d/${videoData.id}/preview`;
+        document.getElementById('video-frame').src = embedUrl;
+
+        // Back button functionality
+        document.getElementById('back-button').addEventListener('click', function() {
+            goBackToCourse();
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                goBackToCourse();
+            }
+        });
+
+        function goBackToCourse() {
+            if (videoData.course && videoData.lesson) {
+                // Return to specific lesson
+                window.location.href = `course.html?course=${videoData.course}&lesson=${videoData.lesson}`;
+            } else if (videoData.course) {
+                // Return to course start
+                window.location.href = `course.html?course=${videoData.course}`;
+            } else {
+                // Return to dashboard
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>
