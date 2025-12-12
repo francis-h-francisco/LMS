@@ -30,7 +30,7 @@
           "title": "2.1: The Art of Storytelling",
           "content": [
             {"type": "text", "data": "Facts tell, but stories sell. The most memorable tours are compelling narratives. Watch the video below for an introduction to the art of storytelling."},
-            {"type": "video", "data": "https://www.youtube.com/embed/_k-g-e4e2_o"}
+            {"type": "video", "data": "https://youtu.be/sAdYFRhlSg4"}
           ]
         },
         {
@@ -98,4 +98,5 @@
       }
     ]
   }
+
 }
